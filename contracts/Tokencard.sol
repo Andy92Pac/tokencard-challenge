@@ -50,7 +50,7 @@ contract Tokencard {
 	mapping (address => bool) public m_whitelistedAddresses;
 
 	// Daily spent amount
-	mapping (address => Spent) private m_dailySpent;
+	mapping (address => Spent) public m_dailySpent;
 
 	// Smart contract owner
 	address public _owner;
