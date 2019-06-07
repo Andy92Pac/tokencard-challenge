@@ -76,7 +76,7 @@ contract('Tokencard', ([owner, whitelistedAccount, otherWhitelistedAccount, notW
 	it('should revert because contract balance is empty', async () => {
 		let amount = '1000'
 		await expectRevert(
-			instance.send(whitelistedAccount, amount, { from: owner }),
+			instance.spend(whitelistedAccount, amount, { from: owner }),
 			'Amount exceeds current balance'
 			);
 	})
@@ -94,7 +94,7 @@ contract('Tokencard', ([owner, whitelistedAccount, otherWhitelistedAccount, notW
 		let contractBalance = await web3.eth.getBalance(instance.address);
 		let recipientBalance = await web3.eth.getBalance(whitelistedAccount);
 		
-		let txReceipt = await instance.send(whitelistedAccount, amount, { from: owner })
+		let txReceipt = await instance.spend(whitelistedAccount, amount, { from: owner })
 
 		await expectEvent.inTransaction(
 			txReceipt.tx,
@@ -113,7 +113,7 @@ contract('Tokencard', ([owner, whitelistedAccount, otherWhitelistedAccount, notW
 		let contractBalance = await web3.eth.getBalance(instance.address);
 		let recipientBalance = await web3.eth.getBalance(notWhitelistedAccount);
 		
-		let txReceipt = await instance.send(notWhitelistedAccount, amount, { from: owner })
+		let txReceipt = await instance.spend(notWhitelistedAccount, amount, { from: owner })
 
 		await expectEvent.inTransaction(
 			txReceipt.tx,
@@ -131,7 +131,7 @@ contract('Tokencard', ([owner, whitelistedAccount, otherWhitelistedAccount, notW
 		let amount = new BN('80');
 		
 		await expectRevert(
-			instance.send(notWhitelistedAccount, amount, { from: owner }),
+			instance.spend(notWhitelistedAccount, amount, { from: owner }),
 			'Spent amount exceeds daily limit'
 			);
 	})
@@ -143,7 +143,7 @@ contract('Tokencard', ([owner, whitelistedAccount, otherWhitelistedAccount, notW
 		let contractBalance = await web3.eth.getBalance(instance.address);
 		let recipientBalance = await web3.eth.getBalance(notWhitelistedAccount);
 		
-		let txReceipt = await instance.send(notWhitelistedAccount, amount, { from: owner })
+		let txReceipt = await instance.spend(notWhitelistedAccount, amount, { from: owner })
 
 		await expectEvent.inTransaction(
 			txReceipt.tx,

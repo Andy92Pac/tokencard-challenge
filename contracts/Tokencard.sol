@@ -91,7 +91,7 @@ contract Tokencard {
      * @param amount The amount of ethers to send
      * @return A boolean that indicates if the operation was successful
      */
-     function send(address payable to, uint amount) onlyOwner public returns (bool) {
+     function spend(address payable to, uint amount) onlyOwner public returns (bool) {
 
      	require(address(this).balance >= amount, 'Amount exceeds current balance');
      	
